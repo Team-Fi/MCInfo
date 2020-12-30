@@ -173,6 +173,7 @@ class Ui_MCInfo(object):
     def textChanged(self):
         if len(self.textEdit.text()) > 3:
             self.pushButton.setEnabled(True)
+            self.retranslateUi(MCInfo)
         else:
             self.pushButton.setEnabled(False)
 
