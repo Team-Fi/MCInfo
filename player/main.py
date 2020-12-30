@@ -20,10 +20,11 @@ class Ui_MCInfo(object):
     def setupUi(self, MCInfo):
         MCInfo.setObjectName("MCInfo")
         MCInfo.resize(270, 290)
-        import os.path as path
-        bundle_dir = getattr(sys, '_MEIPASS', path.abspath(path.dirname(__file__)))
-        data_path = os.path.abspath(path.join(bundle_dir, 'icon.png'))
-        MCInfo.setWindowIcon(QIcon(f"{data_path}"))
+        # import os.path as path
+        # bundle_dir = getattr(sys, '_MEIPASS', path.abspath(path.dirname(__file__)))
+        # import os
+        # data_path = os.path.abspath(path.join(bundle_dir, 'icon.png'))
+        # MCInfo.setWindowIcon(QIcon(f"{data_path}"))
         self.centralwidget = QtWidgets.QWidget(MCInfo)
         self.centralwidget.setObjectName("centralwidget")
         self.textEdit = QtWidgets.QLineEdit(self.centralwidget)
