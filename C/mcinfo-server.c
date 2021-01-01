@@ -75,7 +75,10 @@ int main()
 	char url[512];
 
 	printf("Address: ");
-	scanf("%s", address) == 1;
+	if (scanf("%s", address) == EOF)
+	{
+		return -1;
+	}
 
 	printf("Gathering some data...\n");
 
@@ -162,7 +165,9 @@ int main()
 			mods[strlen(mods) - 2] = '\0';
 
 			printf("Mods: %s\n", mods);
-		} else {
+		}
+		else
+		{
 			printf("Plugins/Mods: None\n");
 		}
 	}

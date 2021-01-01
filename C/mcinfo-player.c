@@ -77,7 +77,10 @@ int main()
 	char timeBuff[32];
 
 	printf("Username: ");
-	scanf("%s", username) == 1;
+	if (scanf("%s", username) == EOF)
+	{
+		return -1;
+	}
 
 	printf("Gathering some data...\n");
 
