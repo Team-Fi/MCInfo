@@ -64,7 +64,7 @@ char *humanReadableTime(time_t timestamp)
 	struct tm *tm;
 
 	tm = gmtime(&timestamp);
-	snprintf(buff, 128, "%d-%d-%d %d:%d:%d", tm->tm_year+1900, tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
+	snprintf(buff, 128, "%d-%d-%d %d:%d:%d", tm->tm_year + 1900, tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
 
 	return buff;
 }

@@ -70,6 +70,7 @@ char *humanReadableTime(time_t timestamp)
 
 int main()
 {
+	cJSON *current_element = NULL;
 	char address[256];
 	char url[512];
 
@@ -87,6 +88,83 @@ int main()
 	if (cJSON_IsTrue(cJSON_GetObjectItem(info, "online")))
 	{
 		printf("Address: %s\n", address);
+		printf("\n");
+		printf("MOTD: %s\n", cJSON_GetArrayItem(cJSON_GetObjectItem(cJSON_GetObjectItem(info, "motd"), "clean"), 0)->valuestring);
+		printf("\n");
+		printf("Players: ");
+		if (cJSON_GetObjectItem(cJSON_GetObjectItem(info, "players"), "list"))
+		{
+			char players[32768];
+
+			cJSON_ArrayForEach(current_element, cJSON_GetObjectItem(cJSON_GetObjectItem(info, "players"), "list"))
+			{
+				strcat(players, current_element->valuestring);
+				strcat(players, ", ");
+			}
+
+			players[strlen(players) - 2] = '\0';
+
+			printf("%s (%d/%d)\n", players, cJSON_GetObjectItem(cJSON_GetObjectItem(info, "players"), "online")->valueint, cJSON_GetObjectItem(cJSON_GetObjectItem(info, "players"), "max")->valueint);
+		}
+		else if (cJSON_GetObjectItem(cJSON_GetObjectItem(info, "players"), "online")->valueint)
+		{
+			printf("%d/%d\n", cJSON_GetObjectItem(cJSON_GetObjectItem(info, "players"), "online")->valueint, cJSON_GetObjectItem(cJSON_GetObjectItem(info, "players"), "max")->valueint);
+		}
+		else
+		{
+			printf("None\n");
+		}
+		printf("\n");
+		printf("Version: %s\n", cJSON_GetObjectItem(info, "version")->valuestring);
+		printf("\n");
+		if (cJSON_GetObjectItem(info, "hostname"))
+		{
+			printf("Hostname: %s\n", cJSON_GetObjectItem(info, "hostname")->valuestring);
+		}
+		else
+		{
+			printf("Hostname: None\n");
+		}
+		printf("\n");
+		if (cJSON_GetObjectItem(info, "software"))
+		{
+			printf("Software: %s\n", cJSON_GetObjectItem(info, "software")->valuestring);
+		}
+		else
+		{
+			printf("Software: None\n");
+		}
+		printf("\n");
+		if (cJSON_GetObjectItem(info, "plugins"))
+		{
+			char plugins[32768];
+
+			cJSON_ArrayForEach(current_element, cJSON_GetObjectItem(cJSON_GetObjectItem(info, "plugins"), "names"))
+			{
+				strcat(plugins, current_element->valuestring);
+				strcat(plugins, ", ");
+			}
+
+			plugins[strlen(plugins) - 2] = '\0';
+
+			printf("Plugins: %s\n", plugins);
+		}
+		else if (cJSON_GetObjectItem(info, "mods"))
+		{
+			char mods[32768];
+
+			cJSON_ArrayForEach(current_element, cJSON_GetObjectItem(cJSON_GetObjectItem(info, "mods"), "names"))
+			{
+				strcat(mods, current_element->valuestring);
+				strcat(mods, ", ");
+			}
+
+			mods[strlen(mods) - 2] = '\0';
+
+			printf("Mods: %s\n", mods);
+		} else {
+			printf("Plugins/Mods: None\n");
+		}
 	}
 	else
 	{
