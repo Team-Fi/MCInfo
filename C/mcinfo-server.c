@@ -75,7 +75,7 @@ int main()
 	char url[512];
 
 	printf("Address: ");
-	if (scanf("%s", address) == EOF)
+	if (scanf("%s", address) != 1)
 	{
 		return -1;
 	}

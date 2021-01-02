@@ -77,7 +77,7 @@ int main()
 	char timeBuff[32];
 
 	printf("Username: ");
-	if (scanf("%s", username) == EOF)
+	if (scanf("%s", username) != 1)
 	{
 		return -1;
 	}
